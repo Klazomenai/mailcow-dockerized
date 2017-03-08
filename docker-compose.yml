@@ -243,7 +243,6 @@ services:
       dns_search: mailcow-network
       ports:
         - "${HTTPS_BIND:-0.0.0.0}:${HTTPS_PORT:-443}:${HTTPS_PORT:-443}"
-        - "${HTTP_BIND:-127.0.0.1}:${HTTP_PORT:-80}:${HTTP_PORT:-80}"
       restart: always
       networks:
         mailcow-network:
