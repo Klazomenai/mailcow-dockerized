@@ -59,7 +59,7 @@ RUN echo '30 3 * * *   vmail  /usr/bin/doveadm quota recalc -A' > /etc/cron.d/do
 
 WORKDIR /tmp
 
-RUN wget http://hg.dovecot.org/dovecot-antispam-plugin/archive/tip.tar.gz -O - | tar xvz  \
+RUN wget https://dovecot.org/tmp/dovecot-antispam-plugin-final.tbz2 -O - | tar xvz  \
 	&& cd /tmp/dovecot-antispam* \
 	&& ./autogen.sh \
 	&& ./configure --prefix=/usr \
