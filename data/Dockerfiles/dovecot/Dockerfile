@@ -50,6 +50,7 @@ RUN apt-get -y install dovecot-common \
 	libdbd-mysql-perl \
 	libipc-run-perl \
 	make \
+	bzip2 \
 	cpanminus
 
 RUN sed -i -E 's/^(\s*)system\(\);/\1unix-stream("\/dev\/log");/' /etc/syslog-ng/syslog-ng.conf
@@ -59,7 +60,9 @@ RUN echo '30 3 * * *   vmail  /usr/bin/doveadm quota recalc -A' > /etc/cron.d/do
 
 WORKDIR /tmp
 
-RUN wget https://dovecot.org/tmp/dovecot-antispam-plugin-final.tbz2 -O - | tar xvz  \
+RUN wget https://dovecot.org/tmp/dovecot-antispam-plugin-final.tbz2 \
+  && bzip2 -d -v dovecot-antispam-plugin-final.tbz2 \
+  && tar xvf dovecot-antispam-plugin-final.tar \
 	&& cd /tmp/dovecot-antispam* \
 	&& ./autogen.sh \
 	&& ./configure --prefix=/usr \
